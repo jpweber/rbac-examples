@@ -1,5 +1,5 @@
 # RBAC Examples
-This repo contains examples of how to use RBAC for creating specific roles and service accounts for different use cases. Throughout the namespace is set to `jpw`. To use these in your environment the namespace should be changed to your desired namespace with a simple find and replace. 
+This repo contains examples of how to use RBAC for creating specific roles and service accounts for different use cases. Throughout the namespace is set to `jpw`. To use these in your environment the namespace should be changed to your desired namespace with a simple find and replace. PRs are welcome for new use cases or modificaitons to existing ones. 
 
 
 ## Use Cases
