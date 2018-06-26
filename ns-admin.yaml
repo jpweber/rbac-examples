@@ -1,0 +1,62 @@
+#role
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ns-admin
+rules:
+- apiGroups:
+  - ""
+  resources:
+    - namespaces
+    - resourcequotas
+    - limitranges
+    - daemonsets
+  verbs: ["get", "list", "watch"]
+
+- apiGroups:
+  - "*"
+  resources:
+    - configmaps
+    - deployments
+    - events
+    - endpoints
+    - horizontalpodautoscalers
+    - ingress
+    - jobs
+    - nodes
+    - pods
+    - persistentvolumes
+    - persistentvolumeclaims
+    - replicasets
+    - serviceaccounts
+    - services
+    - statefulsets
+  verbs: ["*"]
+
+
+#role binding
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ns-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ns-admin
+subjects:
+- kind: ServiceAccount
+  name: ns-admin
+  namespace: jpw
+- kind: Group
+  name: ns-admin
+  apiGroup: rbac.authorization.k8s.io
+
+#service account
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ns-admin
+  namespace: jpw

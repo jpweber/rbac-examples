@@ -1,0 +1,60 @@
+#role
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: support
+rules:
+- apiGroups:
+   - ""
+   - extensions
+   - apps
+  resources:
+    - configmaps
+    - deployments
+    - endpoints
+    - events    
+    - horizontalpodautoscalers
+    - ingresses
+    - jobs
+    - pods
+    - pods/log
+    - persistentvolumes
+    - persistentvolumeclaims
+    - replicasets
+    - serviceaccounts
+    - services
+    - statefulsets
+  verbs: ["get", "list"]
+- apiGroups:
+   - extensions
+   - ""
+  resources:
+    - pods
+  verbs: ["delete"]
+
+#role binding
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: support
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: support
+subjects:
+- kind: ServiceAccount
+  name: support
+  namespace: jpw
+- kind: Group
+  name: support-staff
+  apiGroup: rbac.authorization.k8s.io
+
+#service account
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: support
+  namespace: jpw
